@@ -2,11 +2,22 @@ using UnityEngine;
 
 public class GoalZone : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    BoxCollider coll;
+    Renderer renderer;
+    void Start()
+    {
+        coll = GetComponent<BoxCollider>();
+        renderer = GetComponent<Renderer>();
+        coll.isTrigger = true;
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            QuestManager.Instance.AreaReached();
+            coll.isTrigger = false;
+            renderer.material.color = Color.grey;
+            GameEvents.AreaReached();
         }
     }
 }

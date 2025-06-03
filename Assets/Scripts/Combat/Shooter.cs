@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    public float range = 50f;
-    public int damage = 1;
+    [SerializeField] private float range = 10f;
+    [SerializeField] private int damage = 1;
 
     void Update()
     {
@@ -11,11 +11,10 @@ public class Shooter : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, range))
             {
-                var enemy = hit.collider.GetComponent<Enemy>();
+                var enemy = hit.collider.transform.parent.GetComponent<Enemy>();
                 if (enemy != null)
                 {
                     enemy.TakeDamage(damage);
-                    Debug.Log("Enemy Destroy");
                 }
             }
         }

@@ -1,22 +1,36 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-    public TextMeshProUGUI questText;
-    public GameObject gameCompleteMessage;
+    [SerializeField] private TextMeshProUGUI questText;
+    [SerializeField] private GameObject gameCompleteMessage;
+    [SerializeField] private Button startBtn, replayBtn;
 
-    private void Awake() => Instance = this;
-
-    private void Update()
+    private void Awake()
     {
-        questText.text = "";
-        foreach (var quest in QuestManager.Instance.activeQuests)
-        {
-            questText.text += $"{quest.title} - {quest.currentCount}/{quest.goalCount}\n";
-        }
+        Instance = this;
+    }
+    void Start()
+    {
+        startBtn.onClick.AddListener(GameStart);
+        replayBtn.onClick.AddListener(GameStart);
     }
 
-    public void ShowGameComplete() => gameCompleteMessage.SetActive(true);
+    public void ShowResult(string getInfo)
+    {
+        questText.text = getInfo;
+    }
+
+    public void ShowGameComplete()
+    {
+        gameCompleteMessage.SetActive(true);
+    }
+
+    private void GameStart()
+    {
+        GameEvents.ResetData();
+    }
 }

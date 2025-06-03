@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d91c0f37f7d245bdbea9ff76375b1f3, type: 3}
-  m_Name: ExploreQuest
+  m_Script: {fileID: 11500000, guid: cab9ddbc823d241bb884afb71dbec34d, type: 3}
+  m_Name: KillQuest_SO
   m_EditorClassIdentifier: 
-  title: Explore
-  description: 
-  goalCount: 5
+  title: Kill
+  description: Defeat enemy
+  goalCount: 4
   currentCount: 0
-  reward: 
-  questType: 2
+  reward: XP + Gold
+  questType: 1

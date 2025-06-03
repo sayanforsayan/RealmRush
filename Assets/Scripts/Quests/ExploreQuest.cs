@@ -5,6 +5,6 @@ public class ExploreQuest : BaseQuest
 {
     public override void Progress()
     {
-        currentCount = goalCount;
+        currentCount++;
     }
 }

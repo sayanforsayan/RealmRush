@@ -1,36 +1,69 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager Instance;
-    public List<BaseQuest> activeQuests;
+    [SerializeField] private List<BaseQuest> activeQuests;
 
-    private void Awake()
+    private void OnEnable()
     {
-        Instance = this;
+        GameEvents.OnEnemyKilled += EnemyKilled;
+        GameEvents.OnItemCollected += ItemCollected;
+        GameEvents.OnAreaReached += AreaReached;
+        GameEvents.OnResetCall += ResetData;
     }
 
-    public void EnemyKilled() => UpdateQuest(QuestType.Kill);
-    public void ItemCollected() => UpdateQuest(QuestType.Fetch);
-    public void AreaReached() => UpdateQuest(QuestType.Explore);
-
-    private void UpdateQuest(QuestType type)
+    private void OnDisable()
     {
+        GameEvents.OnEnemyKilled -= EnemyKilled;
+        GameEvents.OnItemCollected -= ItemCollected;
+        GameEvents.OnAreaReached -= AreaReached;
+        GameEvents.OnResetCall -= ResetData;
+    }
+
+    void EnemyKilled()
+    {
+        UpdateQuest(QuestType.Kill);
+    }
+
+    void ItemCollected()
+    {
+        UpdateQuest(QuestType.Fetch);
+    }
+    void AreaReached()
+    {
+        UpdateQuest(QuestType.Explore);
+    }
+
+    void UpdateQuest(QuestType type)
+    {
+        string info = "";
         foreach (var quest in activeQuests)
         {
             if (quest.questType == type && !quest.IsComplete)
                 quest.Progress();
+            info += $"{quest.title} - {quest.currentCount}/{quest.goalCount}\n";
         }
-
+        UIManager.Instance.ShowResult(info);
         if (AllComplete())
             UIManager.Instance.ShowGameComplete();
     }
 
-    private bool AllComplete()
+    bool AllComplete()
     {
-        foreach (var quest in activeQuests)
-            if (!quest.IsComplete) return false;
+        foreach (var acQ in activeQuests)
+            if (!acQ.IsComplete) return false;
         return true;
+    }
+
+    private void ResetData()
+    {
+        string info = "";
+        foreach (var quest in activeQuests)
+        {
+            quest.currentCount = 0;
+            info += $"{quest.title} - {quest.currentCount}/{quest.goalCount}\n";
+        }
+        UIManager.Instance.ShowResult(info);
     }
 }

@@ -2,17 +2,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float gravity = -9.81f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float gravity = -9.81f;
     private CharacterController controller;
-
-    public Transform cameraTransform;
     private Vector3 velocity;
+    private bool isStartGame;
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+    }
+    void OnEnable()
+    {
+        GameEvents.OnResetCall += ResetToDefault;
+    }
 
-    void Start() => controller = GetComponent<CharacterController>();
+    void OnDisable()
+    {
+        GameEvents.OnResetCall -= ResetToDefault;
+    }
 
     void Update()
     {
+        if (!isStartGame) return;
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector3 move = transform.right * h + transform.forward * v;
@@ -20,5 +31,10 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * moveSpeed * Time.deltaTime);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void ResetToDefault()
+    {
+
     }
 }

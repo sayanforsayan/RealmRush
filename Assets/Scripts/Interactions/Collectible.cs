@@ -6,7 +6,7 @@ public class Collectible : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            QuestManager.Instance.ItemCollected();
+            GameEvents.ItemCollected();
             Destroy(gameObject);
         }
     }
