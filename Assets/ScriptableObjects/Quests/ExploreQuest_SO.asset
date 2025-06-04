@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d91c0f37f7d245bdbea9ff76375b1f3, type: 3}
   m_Name: ExploreQuest_SO
   m_EditorClassIdentifier: 
-  title: Explore
-  description: Reach the glowing zone
-  goalCount: 4
-  currentCount: 0
-  reward: Unlocked New Level
+  title: Explore Zone
+  description: Explore Health Zone
+  receiveUnit: 10
+  totalUnit: 40
+  currentUnit: 0
   questType: 2

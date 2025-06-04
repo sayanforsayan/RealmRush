@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab9ddbc823d241bb884afb71dbec34d, type: 3}
   m_Name: KillQuest_SO
   m_EditorClassIdentifier: 
-  title: Kill
-  description: Defeat enemy
-  goalCount: 4
-  currentCount: 0
-  reward: XP + Gold
+  title: Enemies
+  description: Kill Enemies
+  receiveUnit: 20
+  totalUnit: 80
+  currentUnit: 0
   questType: 1

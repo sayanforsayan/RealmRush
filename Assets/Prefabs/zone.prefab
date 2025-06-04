@@ -121,3 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14c7a3479a0e42019a3408e3b27faaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  areaReachedEvent: {fileID: 11400000, guid: 6f5d0086419184bb3baadcc3e733309b, type: 2}

@@ -9,12 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75bf300bec554481e91d7643b07d7419, type: 3}
-  m_Name: FetchQuest_SO
+  m_Script: {fileID: 11500000, guid: ea2a1e419163343048bc585bdc4ef956, type: 3}
+  m_Name: ItemCollectedEvent
   m_EditorClassIdentifier: 
-  title: Health Cube
-  description: Collect Cube
-  receiveUnit: 1
-  totalUnit: 12
-  currentUnit: 0
-  questType: 0

@@ -1,69 +1,56 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Manages and tracks all active quests in the game.
+/// Updates quests when events are triggered (kill, collect, explore).
+/// </summary>
 public class QuestManager : MonoBehaviour
 {
     [SerializeField] private List<BaseQuest> activeQuests;
 
-    private void OnEnable()
-    {
-        GameEvents.OnEnemyKilled += EnemyKilled;
-        GameEvents.OnItemCollected += ItemCollected;
-        GameEvents.OnAreaReached += AreaReached;
-        GameEvents.OnResetCall += ResetData;
-    }
+    /// <summary>
+    /// Call when enemy killed
+    /// </summary>
+    public void EnemyKilled() => UpdateQuest(QuestType.Kill);
 
-    private void OnDisable()
-    {
-        GameEvents.OnEnemyKilled -= EnemyKilled;
-        GameEvents.OnItemCollected -= ItemCollected;
-        GameEvents.OnAreaReached -= AreaReached;
-        GameEvents.OnResetCall -= ResetData;
-    }
+    /// <summary>
+    /// Call when Cube Collected
+    /// </summary>
+    public void ItemCollected() => UpdateQuest(QuestType.Fetch);
 
-    void EnemyKilled()
-    {
-        UpdateQuest(QuestType.Kill);
-    }
+    /// <summary>
+    /// Call when visit area
+    /// </summary>
+    public void AreaReached() => UpdateQuest(QuestType.Explore);
 
-    void ItemCollected()
-    {
-        UpdateQuest(QuestType.Fetch);
-    }
-    void AreaReached()
-    {
-        UpdateQuest(QuestType.Explore);
-    }
-
-    void UpdateQuest(QuestType type)
+    /// <summary>
+    /// Update all information
+    /// </summary>
+    /// <param name="type"></param>
+    private void UpdateQuest(QuestType type)
     {
         string info = "";
         foreach (var quest in activeQuests)
         {
             if (quest.questType == type && !quest.IsComplete)
                 quest.Progress();
-            info += $"{quest.title} - {quest.currentCount}/{quest.goalCount}\n";
+            info += $"{quest.title} - {quest.currentUnit}/{quest.totalUnit}\n";
         }
+
+        // Update UI
         UIManager.Instance.ShowResult(info);
         if (AllComplete())
             UIManager.Instance.ShowGameComplete();
     }
 
-    bool AllComplete()
+    /// <summary>
+    /// Returns true if all  are completed.
+    /// </summary>
+    private bool AllComplete()
     {
-        foreach (var acQ in activeQuests)
-            if (!acQ.IsComplete) return false;
+        foreach (var q in activeQuests)
+            if (!q.IsComplete) return false;
         return true;
-    }
-
-    private void ResetData()
-    {
-        string info = "";
-        foreach (var quest in activeQuests)
-        {
-            quest.currentCount = 0;
-            info += $"{quest.title} - {quest.currentCount}/{quest.goalCount}\n";
-        }
-        UIManager.Instance.ShowResult(info);
     }
 }
