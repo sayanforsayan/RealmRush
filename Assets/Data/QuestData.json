@@ -1,0 +1,39 @@
+{
+    "Items": [
+        {
+            "title": "Test SO 0",
+            "description": "This is for test",
+            "goalCount": 10,
+            "reward": 1,
+            "questType": 0
+        },
+        {
+            "title": "Test SO 1",
+            "description": "This is for test",
+            "goalCount": 20,
+            "reward": 2,
+            "questType": 1
+        },
+        {
+            "title": "Test SO 2",
+            "description": "This is for test",
+            "goalCount": 30,
+            "reward": 3,
+            "questType": 0
+        },
+        {
+            "title": "Test SO 3",
+            "description": "This is for test",
+            "goalCount": 40,
+            "reward": 4,
+            "questType": 2
+        },
+        {
+            "title": "Test SO 4",
+            "description": "This is for test",
+            "goalCount": 50,
+            "reward": 5,
+            "questType": 2
+        }
+    ]
+}

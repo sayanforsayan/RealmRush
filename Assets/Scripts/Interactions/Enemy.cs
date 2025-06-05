@@ -2,7 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Takes damage and dies after reaching 0 health.
-/// Raises an event when killed.
+/// Raise an event when killed.
 /// </summary>
 public class Enemy : MonoBehaviour
 {
